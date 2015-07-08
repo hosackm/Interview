@@ -14,6 +14,7 @@ DelayLine::DelayLine(const unsigned int _sampleRate, const unsigned int _maxDela
     buffer_length = sampleRate * _maxDelayMs / 1000;
     readIndex = writeIndex = 0;
     amount = 0.0f;
+    feedback = 0.0f;
     buffer = new float[buffer_length];
     for(int i = 0; i < buffer_length; ++i)
         buffer[i] = 0.0f;
@@ -74,7 +75,10 @@ void DelayLine::SetDelay(const unsigned int delayMs)
 
 void DelayLine::SetAmount(float _amount)
 {
-    _amount = (_amount < 0.0) ? 0.0 : _amount;
-    _amount = (_amount > 1.0) ? 1.0 : _amount;
-    amount = _amount;
+    amount = min(1.0f, max(0.0f, _amount));
+}
+
+void DelayLine::SetFeedback(float _feedback)
+{
+    feedback = min(0.9f, max(0.0f, _feedback));
 }
