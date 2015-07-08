@@ -15,9 +15,10 @@ class DelayLine
 {
 
 public:
-        /* Create a Delay Line based on sampleRate and the maximum delay needed */
+    /* Create a Delay Line based on sampleRate and the maximum delay needed */
     DelayLine(const unsigned int _sampleRate, const unsigned int _maxDelayMs);
     ~DelayLine();
+    
     void AddSamples(const float *input, const unsigned int numSamples);
     void GetSamples(float *output, const unsigned int numSamples);
     void SetDelay(const unsigned int delayMs);

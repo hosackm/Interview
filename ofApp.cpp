@@ -18,7 +18,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    string s = "Min: " + ofToString(min) + "\tMax: " + ofToString(max);
     meter->draw(200, 20);
+    ofDrawBitmapString(s, 20, 20);
 }
 
 //--------------------------------------------------------------
@@ -68,6 +70,13 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 void ofApp::audioIn(float * input, int bufferSize, int nChannels)
 {
+    /* Debugging RtAudio providing values between -2.0 to 2.0 */
+    /*for(int i = 0; i < bufferSize; ++i)
+    {
+        max = (input[i] > max) ? input[i] : max;
+        min = (input[i] < min) ? input[i] : min;
+    }*/
+
     delay->AddSamples(input, bufferSize);
 }
 

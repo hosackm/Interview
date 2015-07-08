@@ -29,4 +29,7 @@ class ofApp : public ofBaseApp{
         ofSoundStream stream;
         PeakMeter *meter;
         DelayLine *delay;
+    
+    float max;
+    float min;
 };

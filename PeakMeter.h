@@ -25,6 +25,7 @@ struct TimedSample
 
 public:
     PeakMeter(const unsigned int _retainTimeMillis = 1000);
+
     /* Add a number of samples to the PeakMeter */
     void AddSamples(float *samples, const unsigned int numSamples);
     /* Get Peak Hold */
