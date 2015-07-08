@@ -18,9 +18,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    /* Debugging RtAudio -2.0 to 2.0 values
     string s = "Min: " + ofToString(min) + "\tMax: " + ofToString(max);
+    ofDrawBitmapString(s, 20, 20);*/
+    
     meter->draw(200, 20);
-    ofDrawBitmapString(s, 20, 20);
 }
 
 //--------------------------------------------------------------
