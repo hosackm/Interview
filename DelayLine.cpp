@@ -10,11 +10,13 @@
 
 DelayLine::DelayLine(const unsigned int _sampleRate, const unsigned int _maxDelayMs)
 {
-    sampleRate = _sampleRate;
-    buffer_length = sampleRate * _maxDelayMs / 1000;
     readIndex = writeIndex = 0;
     amount = 0.0f;
     feedback = 0.0f;
+
+    sampleRate = _sampleRate;
+    buffer_length = sampleRate * _maxDelayMs / 1000;
+
     buffer = new float[buffer_length];
     for(int i = 0; i < buffer_length; ++i)
         buffer[i] = 0.0f;
@@ -28,6 +30,11 @@ DelayLine::~DelayLine()
 void DelayLine::AddSamples(const float* input, const unsigned int numSamples)
 {
     /* Add samples to DelayLine at writeIndex */
+    long wetIndex = readIndex - numSamples;
+
+    /* If we went negative wrap back around the end */
+    wetIndex = (wetIndex < 0) ? buffer_length + wetIndex : wetIndex;
+
     for(int i = 0; i < numSamples; ++i)
     {
         /* Wrap around circular buffer if needed */
@@ -35,7 +42,16 @@ void DelayLine::AddSamples(const float* input, const unsigned int numSamples)
         {
             writeIndex = 0;
         }
-        buffer[writeIndex++] = input[i];
+        if(wetIndex == buffer_length)
+        {
+            wetIndex = 0;
+        }
+        
+        float wet = buffer[wetIndex++];
+        float dry = input[i];
+        float fscale = feedback / 2.0;
+        buffer[writeIndex++] = fscale * wet + dry * (1.0 - fscale);
+        //buffer[writeIndex++] = input[i];
     }
 }
 
@@ -62,6 +78,7 @@ void DelayLine::GetSamples(float *output, const unsigned int numSamples)
         float wet = buffer[readIndex++];
         float dry = buffer[dryIndex++];
         output[i] = amount * wet + (1.0 - amount) * dry;
+        //output[i] = dry;
     }
 }
 

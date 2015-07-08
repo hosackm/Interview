@@ -14,7 +14,13 @@
 /* Only handles 1 channel of audio.  Will update to handle interleaved Stereo. */
 class DelayLine
 {
-
+    /*
+     *                         +--------+
+     *     input --->( + ) --->| Buffer |--->( + )----> output
+     *                 |       +--------+      |
+     *                 |                       |
+     *                 +-----------------------+
+     */
 public:
     /* Create a Delay Line based on sampleRate and the maximum delay needed */
     DelayLine(const unsigned int _sampleRate, const unsigned int _maxDelayMs);

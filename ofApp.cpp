@@ -2,13 +2,15 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofBackground(24, 24, 24);
-    
-    stream.setup(this, 1, 1, 48000, 512, 4);
     meter = new PeakMeter(1000);
     delay = new DelayLine(48000, 1000);
+
     delay->SetDelay(750);
     delay->SetAmount(0.5);
+    delay->SetFeedback(0.0);
+
+    ofBackground(24, 24, 24);
+    stream.setup(this, 1, 1, 48000, 512, 4);
 }
 
 //--------------------------------------------------------------
