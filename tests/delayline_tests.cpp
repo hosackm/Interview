@@ -6,6 +6,8 @@
 //
 //
 
+#define GTESTING
+
 #include <gtest/gtest.h>
 #include "DelayLine.h"
 

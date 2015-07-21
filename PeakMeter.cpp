@@ -7,6 +7,7 @@
 //
 
 #include "PeakMeter.h"
+#include "OfMain.h"
 
 PeakMeter::PeakMeter(unsigned int _retainTimeMillis)
 {

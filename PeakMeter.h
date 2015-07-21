@@ -9,7 +9,7 @@
 #ifndef __DelayEffectGui__PeakMeter__
 #define __DelayEffectGui__PeakMeter__
 
-#include "OfMain.h"
+#include <vector>
 
 class PeakMeter
 {
@@ -41,7 +41,7 @@ private:
     /* Most recent peak value added */
     float current_peak;
     /* Store samples for later */
-    vector<struct TimedSample> samples;
+    std::vector<struct TimedSample> samples;
     /* Amount of time to retain samples */
     unsigned long retainTimeMillis;
 };

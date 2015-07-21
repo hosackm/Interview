@@ -93,7 +93,7 @@ public:
     }
 
 /* Only for testing */
-#ifdef DEBUG
+#ifdef GTESTING
     unsigned getRead()
     {
         return read;
