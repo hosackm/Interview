@@ -42,13 +42,6 @@ public:
     }
 
     int push(const T input) {
-        /* Using Atomic */
-        /*p_buf[write.fetch_add(1)];
-        if(write.load() >= length)
-            write -= (int)length;
-        if(write.load() == read.load())
-            read++;*/
-        /* Replaced with Atomic Operations */
         p_buf[write++] = input;
         if(write >= length)
             write -= (int)length;
@@ -60,11 +53,6 @@ public:
     }
     
     int pop(T &output) {
-        /* Using Atomic */
-        /*output = p_buf[read.fetch_add(1)];
-        if(read.load() >= length)
-            read -= (int)length;*/
-        
         output = p_buf[read++];
         if(read >= length)
             read -= (int)length;
