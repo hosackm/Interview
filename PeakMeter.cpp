@@ -71,8 +71,6 @@ float PeakMeter::GetCurrentPeak()
 /* Draw PeakMeter with width w and height h */
 void PeakMeter::draw(const unsigned int w, const unsigned int h, const unsigned x, const unsigned y)
 {
-    //float startx = 70;
-    //float starty = 70;
     float startx = x;
     float starty = y;
     
