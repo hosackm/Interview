@@ -39,8 +39,8 @@ public:
     }
     
     int setAmount(const double am){
-        /* Force amount to be within 0 and 1 */
-        amount = max(min(1.0f, am), 0.0f);
+        /* Force amount to be within 0 and 0.99 so no infinite feedback */
+        amount = max(min(0.99f, am), 0.0f);
     }
 
     int setDelay(const unsigned long delayMS){

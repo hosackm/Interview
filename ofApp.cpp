@@ -12,7 +12,7 @@ ofxIntSlider dtime;
 void ofApp::setup(){
     gui.setup();
     
-    gui.add(damount.setup("wet/dry", DELDEFAULT, 0.0, 1.0, 200, 20));
+    gui.add(damount.setup("wet/dry", DELDEFAULT, 0.0, 0.99, 200, 20));
     gui.add(dtime.setup("delay(ms)", DTIMEDEFAULT, 0, 1000, 200, 20));
     
     damount.addListener(this, &ofApp::delayUpdated);
