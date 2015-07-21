@@ -1,17 +1,19 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
+#include "DelayEffect.h"
 #include "PeakMeter.h"
-#include "DelayLine.h"
 
 class ofApp : public ofBaseApp{
 
 	public:
-        ~ofApp();
 		void setup();
 		void update();
 		void draw();
+    
+        void exit();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -23,13 +25,13 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-        void audioIn(float * input, int bufferSize, int nChannels);
-        void audioOut(float * output, int bufferSize, int nChannels);
-
-        ofSoundStream stream;
-        PeakMeter *meter;
-        DelayLine *delay;
+        void feedbackUpdated(float & amount);
+        void delayTimeUpdated(int & time);
+        void delayUpdated(float & amount);
     
-    float max;
-    float min;
+        void audioIn(float *input, int bufferSize, int nChannels);
+        void audioOut(float *output, int bufferSize, int nChannels);
+		
+        ofSoundStream stream;
+        DelayEffect *delay;
 };

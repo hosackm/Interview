@@ -1,16 +1,30 @@
 #include "ofApp.h"
 
+#define DELDEFAULT 0.3
+#define DTIMEDEFAULT 100
+
+PeakMeter *meter;
+ofxPanel gui;
+ofxFloatSlider damount;
+ofxIntSlider dtime;
+
 //--------------------------------------------------------------
 void ofApp::setup(){
-    meter = new PeakMeter(1000);
-    delay = new DelayLine(48000, 1000);
-
-    delay->SetDelay(750);
-    delay->SetAmount(0.5);
-    delay->SetFeedback(0.0);
-
-    ofBackground(24, 24, 24);
-    stream.setup(this, 1, 1, 48000, 512, 4);
+    gui.setup();
+    
+    gui.add(damount.setup("delay amount", DELDEFAULT, 0.0, 1.0, 200, 20));
+    gui.add(dtime.setup("delay(ms)", DTIMEDEFAULT, 0, 1000, 200, 20));
+    
+    damount.addListener(this, &ofApp::delayUpdated);
+    dtime.addListener(this, &ofApp::delayTimeUpdated);
+    
+    delay = new DelayEffect(1000, 48000);
+    delay->setDelay(DTIMEDEFAULT);
+    delay->setAmount(DELDEFAULT);
+    
+    meter = new PeakMeter();
+    
+    stream.setup(this, 2, 1, 48000, 512, 4);
 }
 
 //--------------------------------------------------------------
@@ -20,11 +34,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    /* Debugging RtAudio -2.0 to 2.0 values
-    string s = "Min: " + ofToString(min) + "\tMax: " + ofToString(max);
-    ofDrawBitmapString(s, 20, 20);*/
-    
-    meter->draw(200, 20);
+    gui.draw();
+    meter->draw(400, 20, 10, 100);
+}
+
+//--------------------------------------------------------------
+void ofApp::exit(){
+    damount.removeListener(this, &ofApp::delayUpdated);
+    dtime.removeListener(this, &ofApp::delayTimeUpdated);
 }
 
 //--------------------------------------------------------------
@@ -72,35 +89,32 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
-void ofApp::audioIn(float * input, int bufferSize, int nChannels)
-{
-    /* Debugging RtAudio providing values between -2.0 to 2.0 */
-    /*for(int i = 0; i < bufferSize; ++i)
-    {
-        max = (input[i] > max) ? input[i] : max;
-        min = (input[i] < min) ? input[i] : min;
-    }*/
-
-    delay->AddSamples(input, bufferSize);
+//--------------------------------------------------------------
+void ofApp::audioIn(float *input, int bufferSize, int nChannels){
+    delay->addSamples(input, bufferSize);
 }
 
-void ofApp::audioOut(float *output, int bufferSize, int nChannels)
-{
+//--------------------------------------------------------------
+void ofApp::audioOut(float *output, int bufferSize, int nChannels){
     float *tmp = new float[bufferSize];
     
-    delay->GetSamples(tmp, bufferSize);
-    meter->AddSamples(tmp, bufferSize);
-    
+    delay->getSamples(tmp, bufferSize);
+
     for(int i = 0; i < bufferSize; ++i)
     {
-        output[i] = tmp[i];
+        output[2*i] = tmp[i];
+        output[2*i+1] = tmp[i];
     }
     
-    delete tmp;
+    meter->AddSamples(tmp, bufferSize);
+    
+    delete [] tmp;
 }
 
-ofApp::~ofApp()
-{
-    delete meter;
-    delete delay;
+void ofApp::delayTimeUpdated(int & time){
+    delay->setDelay(time);
+}
+
+void ofApp::delayUpdated(float & amount){
+    delay->setAmount(amount);
 }
