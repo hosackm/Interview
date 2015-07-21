@@ -12,7 +12,7 @@ ofxIntSlider dtime;
 void ofApp::setup(){
     gui.setup();
     
-    gui.add(damount.setup("delay amount", DELDEFAULT, 0.0, 1.0, 200, 20));
+    gui.add(damount.setup("wet/dry", DELDEFAULT, 0.0, 1.0, 200, 20));
     gui.add(dtime.setup("delay(ms)", DTIMEDEFAULT, 0, 1000, 200, 20));
     
     damount.addListener(this, &ofApp::delayUpdated);
@@ -28,11 +28,6 @@ void ofApp::setup(){
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::draw(){
     gui.draw();
     meter->draw(400, 20, 10, 100);
@@ -44,50 +39,6 @@ void ofApp::exit(){
     dtime.removeListener(this, &ofApp::delayTimeUpdated);
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
 
 //--------------------------------------------------------------
 void ofApp::audioIn(float *input, int bufferSize, int nChannels){
