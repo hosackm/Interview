@@ -6,5 +6,7 @@ The app depends on [OpenFrameworks](www.openframeworks.cc) to work. Audio input 
 
 In order to separate UI from Audio without the use of locks, I used the boost atomic library.  Openframeworks is unable to be built with std-c++ 11 which includes atomic, so I had to use a third party library.
 
+For testing the Google Test Framework is used.
+
 # ToDo
 The peak meter updates very quickly.  I'll use an averaging filter to slow down the input to the peak meter so it is more human friendly.
