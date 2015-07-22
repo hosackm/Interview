@@ -27,11 +27,11 @@ public:
     PeakMeter(const unsigned int _retainTimeMillis = 1000);
     
     /* Add a number of samples to the PeakMeter */
-    void AddSamples(float *samples, const unsigned int numSamples);
+    void addSamples(float *samples, const unsigned int numSamples);
     /* Get Peak Hold */
-    float GetPeakHold();
+    float getPeakHold();
     /* Get Current Peak */
-    float GetCurrentPeak();
+    float getCurrentPeak();
     /* Draw PeakMeter at Point(w, h) */
     void draw(const unsigned int w, const unsigned int h, const unsigned x, const unsigned y);
     

@@ -12,7 +12,6 @@
 #include "ofMain.h"
 #include "DelayLine.h"
 
-//#include <pthread.h>
 #include <boost/atomic/atomic.hpp>
 
 #define min(a, b) ((a < b) ? a : b)
@@ -47,7 +46,7 @@ public:
         delayLine->setDelay(delayMS);
     }
     
-    /* Prototypes for I/O */
+    /* Prototypes for Audio I/O */
     int addSamples(const float *input, const unsigned numSamples);
     int getSamples(float *output, const unsigned numSamples);
 };

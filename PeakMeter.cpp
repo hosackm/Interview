@@ -16,7 +16,7 @@ PeakMeter::PeakMeter(unsigned int _retainTimeMillis)
 }
 
 /* Add a number of samples to the PeakMeter */
-void PeakMeter::AddSamples(float *input, const unsigned int numSamples)
+void PeakMeter::addSamples(float *input, const unsigned int numSamples)
 {
     /* Find max value in buffer */
     float max = 0.0f;
@@ -37,7 +37,7 @@ void PeakMeter::AddSamples(float *input, const unsigned int numSamples)
 }
 
 /* Get Peak Hold */
-float PeakMeter::GetPeakHold()
+float PeakMeter::getPeakHold()
 {
     if(samples.size() == 0)
         return 0.0f;
@@ -64,7 +64,7 @@ float PeakMeter::GetPeakHold()
     return max;
 }
 
-float PeakMeter::GetCurrentPeak()
+float PeakMeter::getCurrentPeak()
 {
     return current_peak;
 }
@@ -76,7 +76,7 @@ void PeakMeter::draw(const unsigned int w, const unsigned int h, const unsigned 
     float starty = y;
     
     /* For some reason RtAudio is providing values between -2.0 and 2.0 */
-    float hold = abs(this->GetPeakHold()) / 2.0 * w;
+    float hold = abs(this->getPeakHold()) / 2.0 * w;
     float cur = abs(current_peak) / 2.0;
     
     /* White border */
