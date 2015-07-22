@@ -9,4 +9,9 @@ In order to separate UI from Audio without the use of locks, I used the boost at
 For testing the Google Test Framework is used.
 
 # ToDo
-The peak meter updates very quickly.  I'll use an averaging filter to slow down the input to the peak meter so it is more human friendly.
+* Peak Meter slower display response
+* Gradient for Peak Meter
+* Peak Meter RMS instead of peak
+* Waveform visualizer
+
+
