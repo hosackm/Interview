@@ -28,12 +28,17 @@ protected:
 public:
 
     DelayLine(long maxMillis, float _SR) {
+        /* Initialize indeces and sample rate */
+        read = write = 0;
+        SR = _SR;
+        
+        /* Calculate and store length of buffer */
         maxlength = (int)(maxMillis * _SR / 1000.) + 1;
         length = maxlength;
-        SR = _SR;
-        p_buf = new T[length + 1];
-        read = write = 0;
-        memset(p_buf, 0, sizeof(T) * (length + 1));
+        
+        /* Allocate memory for buffer */
+        p_buf = new T[length];
+        memset(p_buf, 0, sizeof(T) * (length));
     }
 
     DelayLine() {
