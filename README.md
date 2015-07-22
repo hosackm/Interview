@@ -12,6 +12,5 @@ For testing the Google Test Framework is used.
 * Peak Meter slower display response
 * Gradient for Peak Meter
 * Peak Meter RMS instead of peak
-* Waveform visualizer
 
 

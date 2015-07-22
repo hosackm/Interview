@@ -5,7 +5,6 @@
 
 #include "DelayEffect.h"
 #include "PeakMeter.h"
-
 #include "WaveformPlotter.h"
 
 class ofApp : public ofBaseApp{
@@ -28,7 +27,6 @@ class ofApp : public ofBaseApp{
         ofSoundStream stream; /* RtAudio Sound Stream */
         DelayEffect *delay;   /* Delay Effect */
         WaveformPlotter *plotter; /* To plot audio output */
-
 
 //------------------ Unused OpenFrameworks function stubs ------------------
         void update(){}
