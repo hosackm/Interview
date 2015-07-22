@@ -10,7 +10,6 @@
 #define DelayWithMeter_DelayLine_h
 
 #include <cstring>
-
 #include <boost/atomic/atomic.hpp>
 
 template <class T>

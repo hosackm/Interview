@@ -20,8 +20,8 @@ class ofApp : public ofBaseApp{
         void audioIn(float *input, int bufferSize, int nChannels);
         void audioOut(float *output, int bufferSize, int nChannels);
 		
-        ofSoundStream stream; /*  */
-        DelayEffect *delay;
+        ofSoundStream stream; /* RtAudio Sound Stream */
+        DelayEffect *delay;   /* Delay Effect */
 
 
 
@@ -36,4 +36,5 @@ class ofApp : public ofBaseApp{
         void windowResized(int w, int h){}
         void dragEvent(ofDragInfo dragInfo){}
         void gotMessage(ofMessage msg){}
+//--------------------------------------------------------------------------
 };
